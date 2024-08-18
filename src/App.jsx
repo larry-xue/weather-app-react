@@ -20,6 +20,10 @@ function App() {
     handleSearch()
   }, [])
 
+  useEffect(() => {
+    handleSearch()
+  }, [coordinates])
+
   const handleSearch = async () => {
     // check if coordinates are valid
     if (coordinates.latitude < -90 || coordinates.latitude > 90 || coordinates.longitude < -180 || coordinates.longitude > 180) {
@@ -46,13 +50,13 @@ function App() {
 
   const handleRandomRegion = () => {
     setCoordinates(generateRandomCoordinates())
-    handleSearch()
   }
 
   const handleYourLocation = () => {
     navigator.geolocation.getCurrentPosition(position => {
       setCoordinates({ latitude: position.coords.latitude, longitude: position.coords.longitude })
-      handleSearch()
+    }, () => {
+      alert('Error getting your location')
     })
   }
 
