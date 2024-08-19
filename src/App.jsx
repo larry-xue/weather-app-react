@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { fetchWeather, generateRandomCoordinates } from './utils'
+import { debounce, fetchWeather, generateRandomCoordinates } from './utils'
 
 function App() {
   const [coordinates, setCoordinates] = useState(generateRandomCoordinates())
@@ -24,7 +24,7 @@ function App() {
     handleSearch()
   }, [coordinates])
 
-  const handleSearch = async () => {
+  const handleSearch = debounce(async () => {
     // check if coordinates are valid
     if (coordinates.latitude < -90 || coordinates.latitude > 90 || coordinates.longitude < -180 || coordinates.longitude > 180) {
       alert('Invalid coordinates\nLatitude must be between -90 and 90\nLongitude must be between -180 and 180')
@@ -46,7 +46,7 @@ function App() {
       windSpeed: currentUnit.wind_speed_10m
     })
     setLoading(false)
-  }
+  }, 500)
 
   const handleRandomRegion = () => {
     setCoordinates(generateRandomCoordinates())

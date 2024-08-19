@@ -9,3 +9,14 @@ export function fetchWeather(latitude, longitude) {
 
   return fetch(api)
 }
+
+export function debounce(func, wait) {
+  let timeout
+  return function(...args) {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      console.log('in debounce')
+      func.apply(this, args)
+    }, wait)
+  }
+}
