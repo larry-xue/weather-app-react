@@ -1,9 +1,8 @@
-import './App.css'
 import WeatherBox from '@/components/weather-box'
 
 function App() {
   return (
-    <main className='main'>
+    <main className='flex items-center justify-center h-screen'>
       <WeatherBox />
     </main>
   )

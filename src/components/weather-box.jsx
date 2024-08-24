@@ -64,23 +64,23 @@ export default function WeatherBox() {
   }
 
   return (
-    <section className="weather-container">
-      <div className="weather-header">
-        <h2>Random Weather App</h2>
-        <div className='weather-header-operations'>
-          <button title="Random Region" onClick={handleRandomRegion} disabled={loading}><i className="fas fa-random"></i></button>
-          <button title="Your Location" onClick={handleYourLocation} disabled={loading}><i className="fas fa-map-marker-alt"></i></button>
+    <section className="w-[500px] flex flex-col items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-4">
+        <h2 className="text-2xl font-bold font-serif">Random Weather App</h2>
+        <div className='flex items-center justify-center gap-2'>
+          <button title="Random Region" onClick={handleRandomRegion} disabled={loading}><i className="bg-neutral-500 text-white p-2 rounded-md fas fa-random"></i></button>
+          <button title="Your Location" onClick={handleYourLocation} disabled={loading}><i className="bg-neutral-500 text-white p-2 rounded-md fas fa-map-marker-alt"></i></button>
         </div>
       </div>
-      <div className='weather-search'>
-        <input type="number" min={-90} max={90} placeholder='Enter latitude' value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
-        <input type="number" min={-180} max={180} placeholder='Enter longitude' value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} />
-        <button onClick={handleSearch} disabled={loading}>{loading ? 'Loading...' : 'Search'}</button>
+      <div className='flex items-center justify-center gap-2'>
+        <input className='w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-90} max={90} placeholder='Enter latitude' value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
+        <input className='w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-180} max={180} placeholder='Enter longitude' value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} />
+        <button className='bg-green-600 text-white py-3 px-6 rounded-md font-serif' onClick={handleSearch} disabled={loading}>{loading ? 'Loading...' : 'Search'}</button>
       </div>
-      <ul className="weather-info">
-        <li>Temperature: {weather.temperature} {weatherUnit.temperature}</li>
-        <li>Humidity: {weather.humidity} {weatherUnit.humidity}</li>
-        <li>Wind Speed: {weather.windSpeed} {weatherUnit.windSpeed}</li>
+      <ul className="flex flex-col items-center justify-center gap-2">
+        <li><span className='font-bold font-mono'>Temperature:</span> {weather.temperature} <span className='text-sm font-extralight'>{weatherUnit.temperature}</span></li>
+        <li><span className='font-bold font-mono'>Humidity:</span> {weather.humidity} <span className='text-sm font-extralight'>{weatherUnit.humidity}</span></li>
+        <li><span className='font-bold font-mono'>Wind Speed:</span> {weather.windSpeed} <span className='text-sm font-extralight'>{weatherUnit.windSpeed}</span></li>
       </ul>
       <GoogleMap coordinates={coordinates} />
     </section>
