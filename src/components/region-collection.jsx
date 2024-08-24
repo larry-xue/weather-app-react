@@ -59,7 +59,6 @@ export default forwardRef(function RegionCollection({ setCoordinates }, ref) {
     // get current region from local storage
     const currentRegion = localStorage.getItem(CURRENT_REGION_KEY)
     if (currentRegion) {
-      console.log('in useEffect, currentRegion = ', currentRegion)
       setCurrentRegion(JSON.parse(currentRegion))
     }
   }, [])
@@ -104,7 +103,7 @@ export default forwardRef(function RegionCollection({ setCoordinates }, ref) {
   }))
 
   return (
-    <div className="flex gap-2 flex-wrap w-full items-center justify-start px-6">
+    <div className="flex gap-2 flex-wrap w-full items-center justify-center px-6">
       {regions.map((region) => (
         <button
           className={`bg-gray-200 p-2 rounded-md ${isSameRegion(currentRegion, region) ? 'bg-green-400' : ''}`}

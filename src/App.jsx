@@ -2,7 +2,7 @@ import WeatherBox from '@/components/weather-box'
 
 function App() {
   return (
-    <main className='flex items-center justify-center h-screen'>
+    <main className='w-screen h-screen p-4'>
       <WeatherBox />
     </main>
   )
