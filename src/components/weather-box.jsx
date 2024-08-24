@@ -1,6 +1,10 @@
 import { debounce, fetchWeather, generateRandomCoordinates } from '@/utils'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import GoogleMap from '@/components/google-map'
+import RegionCollection from './region-collection'
+import { Shuffle } from 'lucide-react'
+import { MapPin } from 'lucide-react'
+import AddCollectionDialog from './add-collection-dialog'
 
 export default function WeatherBox() {
   const [coordinates, setCoordinates] = useState({
@@ -18,6 +22,8 @@ export default function WeatherBox() {
     humidity: '%',
     windSpeed: 'km/h'
   })
+
+  const regionCollectionRef = useRef(null)
 
   useEffect(() => {
     handleSearch()
@@ -68,10 +74,12 @@ export default function WeatherBox() {
       <div className="flex items-center justify-center gap-4">
         <h2 className="text-2xl font-bold font-serif">Random Weather App</h2>
         <div className='flex items-center justify-center gap-2'>
-          <button title="Random Region" onClick={handleRandomRegion} disabled={loading}><i className="bg-neutral-500 text-white p-2 rounded-md fas fa-random"></i></button>
-          <button title="Your Location" onClick={handleYourLocation} disabled={loading}><i className="bg-neutral-500 text-white p-2 rounded-md fas fa-map-marker-alt"></i></button>
+          <button className='bg-lime-400 p-2 rounded-md' title="Random Region" onClick={handleRandomRegion} disabled={loading}><Shuffle /></button>
+          <button className='bg-lime-400 p-2 rounded-md' title="Your Location" onClick={handleYourLocation} disabled={loading}><MapPin /></button>
+          <AddCollectionDialog coordinates={coordinates} handleAddRegion={regionCollectionRef.current?.handleAddRegion} />
         </div>
       </div>
+      <RegionCollection setCoordinates={setCoordinates} ref={regionCollectionRef} />
       <div className='flex items-center justify-center gap-2'>
         <input className='w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-90} max={90} placeholder='Enter latitude' value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
         <input className='w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-180} max={180} placeholder='Enter longitude' value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} />
