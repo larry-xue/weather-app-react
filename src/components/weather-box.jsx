@@ -83,8 +83,10 @@ export default function WeatherBox() {
       </div>
       <RegionCollection setCoordinates={setCoordinates} ref={regionCollectionRef} />
       <div className='flex items-center justify-center gap-2 flex-col md:flex-row w-full'>
-        <Input className='w-full md:w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-90} max={90} placeholder='Enter latitude' value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
-        <Input className='w-full md:w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-180} max={180} placeholder='Enter longitude' value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} />
+        <div className='flex items-center justify-center gap-2'>
+          <Input className='w-1/3 sm:w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-90} max={90} placeholder='Enter latitude' value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
+          <Input className='w-1/3 sm:w-[150px] text-center text-xl border-2 border-slate-500 rounded-md p-2 font-mono' type="number" min={-180} max={180} placeholder='Enter longitude' value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} />
+        </div>
         <Button className='bg-green-600 text-white py-3 px-6 rounded-md font-serif' onClick={handleSearch} disabled={loading}>{loading ? 'Loading...' : 'Search'}</Button>
       </div>
       <ul className="flex flex-col items-center justify-center gap-2">
