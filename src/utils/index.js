@@ -1,3 +1,6 @@
+import { twMerge } from "tailwind-merge"
+import { clsx } from "clsx"
+
 export function generateRandomCoordinates() {
   const latitude = Math.random() * 180 - 90
   const longitude = Math.random() * 360 - 180
@@ -18,4 +21,8 @@ export function debounce(func, wait) {
       func.apply(this, args)
     }, wait)
   }
+}
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs))
 }
