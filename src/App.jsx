@@ -3,7 +3,10 @@ import './App.css'
 import { debounce, fetchWeather, generateRandomCoordinates } from './utils'
 
 function App() {
-  const [coordinates, setCoordinates] = useState(generateRandomCoordinates())
+  const [coordinates, setCoordinates] = useState({
+    longitude: 151.2152969,
+    latitude: -33.8567844
+  })
   const [weather, setWeather] = useState({
     temperature: 0,
     humidity: 0,
@@ -80,6 +83,15 @@ function App() {
           <li>Humidity: {weather.humidity} {weatherUnit.humidity}</li>
           <li>Wind Speed: {weather.windSpeed} {weatherUnit.windSpeed}</li>
         </ul>
+        <iframe
+          width="400"
+          height="400"
+          className="random-region-map"
+          loading="lazy"
+          allowFullScreen={true}
+          referrerPolicy="no-referrer-when-downgrade"
+          src={`https://www.google.com/maps/embed/v1/view?key=${import.meta.env.VITE_MAP_API_KEY}&center=${coordinates.latitude},${coordinates.longitude}&zoom=18&maptype=satellite`}>
+        </iframe>
       </section>
     </main>
   )
